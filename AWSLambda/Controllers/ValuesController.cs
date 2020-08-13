@@ -27,6 +27,7 @@ namespace AWSLambda.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            // return "jklfsd";
         }
 
         // PUT api/values/5
