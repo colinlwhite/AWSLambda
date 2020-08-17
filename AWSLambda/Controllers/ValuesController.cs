@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AWSLambda.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AWSLambda.Controllers
@@ -25,9 +26,9 @@ namespace AWSLambda.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public string Post([FromBody] OrderModel order)
         {
-            // return "jklfsd";
+             return "You're on way youung grasshopper";
         }
 
         // PUT api/values/5
