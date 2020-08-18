@@ -28,7 +28,7 @@ namespace AWSLambda.Controllers
         [HttpPost]
         public string Post([FromBody] OrderModel order)
         {
-             return "You're on way youung grasshopper";
+             return "You are on your way young grasshopper";
         }
 
         // PUT api/values/5
