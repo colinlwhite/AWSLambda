@@ -28,7 +28,7 @@ namespace AWSLambda.Controllers
         [HttpPost]
         public string Post([FromBody] OrderModel order)
         {
-             return "You are on your way young grasshopper";
+            return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today.";
         }
 
         // PUT api/values/5
