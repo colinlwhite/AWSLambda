@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AWSLambda.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AWSLambda.Controllers
@@ -25,8 +26,9 @@ namespace AWSLambda.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public string Post([FromBody] OrderModel order)
         {
+            return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today.";
         }
 
         // PUT api/values/5
