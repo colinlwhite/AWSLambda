@@ -30,7 +30,7 @@ namespace AWSLambda.Controllers
         public string Post([FromBody] OrderModel order)
         {
             TextNotifications textNotifications = new TextNotifications();
-            textNotifications.SendTextNotification();
+            textNotifications.SendTextNotification(order);
             return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today.";
         }
 

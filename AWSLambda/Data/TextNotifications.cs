@@ -1,25 +1,27 @@
-﻿using System;
+﻿using AWSLambda.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
+using Microsoft.Extensions.Configuration;
 
 namespace AWSLambda.Data
 {
     public class TextNotifications
     {
-        public void SendTextNotification()
+        public void SendTextNotification(OrderModel order)
         {
-            var accountSid = "ACf52182c66da8da1a8e1d6dee3ea528c7";
-            var authToken = "4b8a41cd48a09e6b598a0da652ba5335";
-            var number = "+12052278229"; 
+            var accountSid = Globals.twilioSID;
+            var authToken = Globals.twilioAuthToken;
+            var number = Globals.inboundPhone;
 
             TwilioClient.Init(accountSid, authToken);
 
             var message = MessageResource.Create(
-                body: "hello Colin",
-                from: new Twilio.Types.PhoneNumber("+16154929390"),
+                body: $"{order.ticker} has triggered an alert",
+                from: new Twilio.Types.PhoneNumber(Globals.outboundPhone),
                 to: new Twilio.Types.PhoneNumber(number)
                 );
         }
