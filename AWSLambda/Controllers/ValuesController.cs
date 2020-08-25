@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AWSLambda.Models;
 using Microsoft.AspNetCore.Mvc;
+using AWSLambda.Data;
 
 namespace AWSLambda.Controllers
 {
@@ -28,6 +29,8 @@ namespace AWSLambda.Controllers
         [HttpPost]
         public string Post([FromBody] OrderModel order)
         {
+            TextNotifications textNotifications = new TextNotifications();
+            textNotifications.SendTextNotification(order);
             return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today.";
         }
 

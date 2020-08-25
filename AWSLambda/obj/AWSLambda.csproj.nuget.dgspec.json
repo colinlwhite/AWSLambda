@@ -54,6 +54,10 @@
             "Amazon.Lambda.AspNetCoreServer": {
               "target": "Package",
               "version": "[5.1.0, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[5.46.0, )"
             }
           },
           "imports": [
