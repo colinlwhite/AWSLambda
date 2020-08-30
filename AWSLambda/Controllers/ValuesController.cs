@@ -31,7 +31,11 @@ namespace AWSLambda.Controllers
         {
             TextNotifications textNotifications = new TextNotifications();
             textNotifications.SendTextNotification(order);
-            return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today.";
+
+            alpacaOrders alpacaConfirmation = new alpacaOrders();
+            string alpacaBuyingPower = alpacaConfirmation.alpacaConnection();
+
+            return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today. {alpacaBuyingPower}";
         }
 
         // PUT api/values/5
