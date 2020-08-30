@@ -13,16 +13,16 @@ namespace AWSLambda.Data
     {
         public void SendTextNotification(OrderModel order)
         {
-            var accountSid = Globals.placeHolderVariable;
-            var authToken = Globals.placeHolderVariable;
-            var number = Globals.placeHolderVariable;
+            var accountSid = Globals.twilioSID;
+            var authToken = Globals.twilioAuthToken;
+            var toNumber = Globals.inboundPhoneNumber;
 
             TwilioClient.Init(accountSid, authToken);
 
             var message = MessageResource.Create(
                 body: $"{order.ticker} has triggered an alert",
-                from: new Twilio.Types.PhoneNumber(Globals.placeHolderVariable),
-                to: new Twilio.Types.PhoneNumber(number)
+                from: new Twilio.Types.PhoneNumber(Globals.outboundPhoneNumber),
+                to: new Twilio.Types.PhoneNumber(toNumber)
                 );
         }
     }
