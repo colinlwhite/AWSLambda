@@ -29,13 +29,13 @@ namespace AWSLambda.Controllers
         [HttpPost]
         public string Post([FromBody] OrderModel order)
         {
-            TextNotifications textNotifications = new TextNotifications();
-            textNotifications.SendTextNotification(order);
+            // TextNotifications textNotifications = new TextNotifications();
+            // textNotifications.SendTextNotification(order);
 
-            alpacaOrders alpacaConfirmation = new alpacaOrders();
-            string alpacaBuyingPower = alpacaConfirmation.alpacaConnection();
+            alpacaOrders alpacaClient = new alpacaOrders();
+            string orderConfirmation = alpacaClient.placeNewOrder();
 
-            return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today. {alpacaBuyingPower}";
+            return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today. {orderConfirmation}";
         }
 
         // PUT api/values/5

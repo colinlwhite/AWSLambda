@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alpaca.Markets;
+using Twilio.TwiML.Voice;
 
 namespace AWSLambda.Data
 {
     public class alpacaOrders
     {
-        public string alpacaConnection()
+        public string placeNewOrder()
         {
             // var APCA_API_BASE_URL = Globals.alpacaURL;
             var APCA_API_KEY_ID = Globals.alpacaKeyId;
@@ -20,6 +21,10 @@ namespace AWSLambda.Data
             // var clock = client.GetClockAsync().Result;
             var accountInformation = client.GetAccountAsync().Result;
 
+            // Submitting a market order to buy 1 share of Tesla at market price
+            var order = client.PostOrderAsync(
+                new NewOrderRequest("TSLA", 2, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
+
             //if (clock != null && accountInformation != null)
             //{
             //    Console.WriteLine(
@@ -30,5 +35,7 @@ namespace AWSLambda.Data
 
             return $"You have {accountInformation.BuyingPower} ready to grow";
         }
+
+
     }
 }
