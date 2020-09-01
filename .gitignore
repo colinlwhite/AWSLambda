@@ -342,3 +342,4 @@ healthchecksdb
 Globals.cs
 .vs/
 obj
+bin
