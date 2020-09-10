@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alpaca.Markets;
+using AWSLambda.Models;
 using Twilio.TwiML.Voice;
 
 namespace AWSLambda.Data
 {
     public class alpacaOrders
     {
-        public string placeNewOrder()
+        public string placeNewOrder(OrderModel order)
         {
-            // var APCA_API_BASE_URL = Globals.alpacaURL;
             var APCA_API_KEY_ID = Globals.alpacaKeyId;
             var APCA_API_SECRET = Globals.alpacaSecretKey;
 
@@ -21,9 +21,12 @@ namespace AWSLambda.Data
             // var clock = client.GetClockAsync().Result;
             var accountInformation = client.GetAccountAsync().Result;
 
-            // Submitting a market order to buy 1 share of Tesla at market price
-            var order = client.PostOrderAsync(
-                new NewOrderRequest("TSLA", 2, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
+            // Submitting a Market Buy Order for 2 Shares of whatever I set up on TradingView
+            // TODO - Based off of my TradingView alerts, code logic to hedge losing money 
+            var TradingViewOrder = client.PostOrderAsync(
+                // new NewOrderRequest("TSLA", 2, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
+                new NewOrderRequest($"{order.ticker}", 2, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
+
 
             //if (clock != null && accountInformation != null)
             //{
