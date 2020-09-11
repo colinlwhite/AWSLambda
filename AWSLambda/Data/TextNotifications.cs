@@ -20,7 +20,7 @@ namespace AWSLambda.Data
             TwilioClient.Init(accountSid, authToken);
 
             var message = MessageResource.Create(
-                body: $"{order.ticker} has triggered an alert",
+                body: $"{order.ticker} has triggered an alert and placed an order",
                 from: new Twilio.Types.PhoneNumber(Globals.outboundPhoneNumber),
                 to: new Twilio.Types.PhoneNumber(toNumber)
                 );

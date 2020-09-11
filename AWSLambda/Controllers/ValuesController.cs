@@ -29,11 +29,14 @@ namespace AWSLambda.Controllers
         [HttpPost]
         public string Post([FromBody] OrderModel order)
         {
-            // TextNotifications textNotifications = new TextNotifications();
-            // textNotifications.SendTextNotification(order);
+            // TODO - Determine if dependency injection is needed for the use of Twilio's API
+            // TODO - Ensure that the first text message only notifies me that there's an alert
+            TextNotifications textNotifications = new TextNotifications();
+            textNotifications.SendTextNotification(order);
 
+            // TODO - Determine if Dependency Injection is needed for the use of Alpaca's API
             alpacaOrders alpacaClient = new alpacaOrders();
-            string orderConfirmation = alpacaClient.placeNewOrder();
+            string orderConfirmation = alpacaClient.placeNewOrder(order);
 
             return $"You've received a TradingView alert for {order.ticker} which opened at ${order.open} today. {orderConfirmation}";
         }
