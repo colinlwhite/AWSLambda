@@ -18,23 +18,11 @@ namespace AWSLambda.Data
             var client = Alpaca.Markets.Environments.Paper
                 .GetAlpacaTradingClient(new SecretKey(APCA_API_KEY_ID, APCA_API_SECRET));
 
-            // var clock = client.GetClockAsync().Result;
             var accountInformation = client.GetAccountAsync().Result;
 
-            // Submitting a Market Buy Order for 2 Shares of whatever I set up on TradingView
             // TODO - Based off of my TradingView alerts, code logic to hedge losing money 
             var TradingViewOrder = client.PostOrderAsync(
-                // new NewOrderRequest("TSLA", 2, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
-                new NewOrderRequest($"{order.ticker}", 2, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
-
-
-            //if (clock != null && accountInformation != null)
-            //{
-            //    Console.WriteLine(
-            //        "Timestamp: {0}, NextOpen: {1}, NextClose: {2}, you'll have {3} to spend!",
-            //        clock.Timestamp, clock.NextOpen, clock.NextClose, accountInformation.BuyingPower
-            //        );
-            //}
+                new NewOrderRequest($"{order.ticker}", 1, OrderSide.Buy, OrderType.Market, TimeInForce.Day));
 
             return $"You have {accountInformation.BuyingPower} ready to grow";
         }
